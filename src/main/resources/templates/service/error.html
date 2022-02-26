@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Error</title>
+</head>
+<body>
+<th:block th:insert="/_topMenu"/>
+<div>
+    <h1>I'm so sorry :(((</h1>
+    <p>Your link is incorrect or outdated and has been removed.</p>
+    <p>But u can try to create your short URL :)</p>
+    <form action="/service/create"
+          method="get">
+        <input type="submit" value="Go to create" />
+    </form>
+</div>
+</body>
+</html>

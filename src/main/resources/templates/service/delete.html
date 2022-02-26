@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Delete by original URL</title>
+</head>
+<body>
+<th:block th:insert="/_topMenu"/>
+<div>
+    <h1>Delete by original URL:</h1>
+    <form action="/delete"
+          method="delete">
+        Original URL:
+        <label>
+            <input type="text" name="originalUrl"/>
+        </label>
+        <br/>
+        <input type="submit" value="Delete" />
+    </form>
+</div>
+</body>
+</html>

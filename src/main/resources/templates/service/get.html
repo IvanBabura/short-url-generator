@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Search original url</title>
+    <style>
+        .getStyle {
+            background: #FFFFF3;
+            border: 1px solid #FFFFD0;
+            padding: 2px;
+        }
+    </style>
+</head>
+<body>
+<th:block th:insert="/_topMenu"/>
+<table border="0">
+    <tr>
+        <th>Search by original URL</th>
+        <th>Search by short URL</th>
+    </tr>
+    <tr>
+        <td>
+            <div class="getStyle">
+                <form action="/get" method="GET">
+                    <p>Original URL: <label>
+                        <input name="originalUrl" >
+                    </label></p>
+                    <p><input type="submit" value="Search"></p>
+                </form>
+            </div>
+        </td>
+        <td>
+            <div class="getStyle">
+                <form action="/get_by_shortUrl" method="GET">
+                    <p>Short URL: <label>
+                        <input name="shortUrl" >
+                    </label></p>
+                    <p><input type="submit" value="Search"></p>
+                </form>
+            </div>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

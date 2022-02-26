@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Create short url</title>
+</head>
+<body>
+<th:block th:insert="/_topMenu"/>
+<div>
+    <h1>Create short URL:</h1>
+    <form action="/create" method="POST">
+        Original URL:
+        <label>
+            <input type="text" name="originalUrl"/>
+        </label>
+        <br/>
+        <input type="submit" value="Create" />
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show all</title>
+</head>
+<body>
+<th:block th:insert="/_topMenu"/>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Original URL</th>
+        <th>Short URL</th>
+    </tr>
+    <tr th:each="urlsList : ${urlsList}">
+        <td th:utext="${urlsList.idUrl}">..</td>
+        <td ><a th:href="@{${urlsList.originalUrl}}"><u th:utext="${urlsList.originalUrl}"></u></a></td>
+        <td ><a th:href="@{${urlsList.shortUrl}}"><u th:utext="${urlsList.shortUrl}"></u></a></td>
+    </tr>
+</table>
+</body>
+</html>
