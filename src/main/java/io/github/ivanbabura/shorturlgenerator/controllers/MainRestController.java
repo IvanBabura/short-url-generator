@@ -21,7 +21,7 @@ public class MainRestController {
         this.service = service;
     }
 
-    @RequestMapping("get_all")
+    @RequestMapping("/get_all")
     public ResponseEntity<List<Url_matching>> get_all() {
         url_matching_List = service.findAll();
         return (url_matching_List != null) ?
