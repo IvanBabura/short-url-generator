@@ -7,8 +7,8 @@ ____
 # English
 
 ## 1 Short description
-Short URL Generator a/k/a. Service for creating short links.
-RESTful Web services. But I've added an MVC controller with simple website to demonstrate how the services work.
+Service for creating short links _aka_ "Short URL Generator".  
+RESTful Web services. But I've added an MVC controller with simple website to demonstrate how the services work.  
 The project is under development and expansion.
 
 ## 2 Technology stack 
@@ -18,7 +18,7 @@ The project is under development and expansion.
 - Оptional: Thymeleaf only for testing REST requests from under the website.
 
 ## 3 Project Features
-Message exchange method: JSON.
+Message exchange method: JSON.  
 All data is stored in the database.
 
 REST Endpoints:
@@ -32,7 +32,7 @@ REST Endpoints:
 MVC is able to implement all these Endpoints, but does not in all cases do the reverse transformation from JSON (I'm not very good at front-end, and this is not the task).
 
 ## 4 Tasks
-! I rarely check the README as I'm immersed in the process. In committees, I try to write everything according to the fads. Perhaps I have already done something from this list and forgot to put it here!
+! _I rarely check the README as I'm immersed in the process. In committees, I try to write everything according to the fads. Perhaps I have already done something from this list and forgot to put it here_!
 
 - [ ] Add exception logging.
 - [ ] Add caching.
@@ -45,8 +45,8 @@ ____
 # Русский
 
 ## 1 Краткое описание
-Сервис создания коротких ссылок.
-RESTfull сервис. Но я добавил MVC-контроллер с простым веб-сайтом, чтобы продемонстрировать, как работает сервис.
+Сервис создания коротких ссылок.  
+RESTfull сервис. Но я добавил MVC-контроллер с простым веб-сайтом, чтобы продемонстрировать, как работает сервис.  
 Идёт доработка, расширение и шлифовка проекта.
 
 ## 2 Стэк используемых технологий
@@ -56,7 +56,7 @@ RESTfull сервис. Но я добавил MVC-контроллер с про
 - Не обязательно: Thymeleaf используется только для теста REST запросов в реальном сайте.
 
 ## 3 Особенности проекта
-Способ обмена сообщений: JSON.
+Способ обмена сообщений: JSON.  
 Все данные хранятся в базе данных.
 
 REST Endpoints: 
@@ -70,7 +70,7 @@ REST Endpoints:
 MVC способен осуществить все эти Endpoints, но не во всех случаях делает обратное преобразование из JSON (я не очень умею во фронтэнд, да и задача не в этом состоит).
 
 ## 4 Задачи
-! Я редко заглядываю в README, тк я погрузился в процесс. В комитах стараюсь писать всё по пунктикам. Возможно, я уже что-то сделал из этого списка и забыл сюда внести!
+! _Я редко заглядываю в README, тк я погрузился в процесс. В комитах стараюсь писать всё по пунктикам. Возможно, я уже что-то сделал из этого списка и забыл сюда внести_!
 
 - [ ] Добавить логирование исключений. 
 - [ ] Добавить кэширование. 
