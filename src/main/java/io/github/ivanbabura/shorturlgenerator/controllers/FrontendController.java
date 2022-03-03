@@ -9,7 +9,7 @@ import io.github.ivanbabura.shorturlgenerator.services.Url_matching_Service;
 import java.util.List;
 
 @Controller
-@RequestMapping("/service")
+@RequestMapping("/view")
 public class FrontendController {
     private final Url_matching_Service service;
 
@@ -25,28 +25,28 @@ public class FrontendController {
 
     @GetMapping("/get")
     public String get() {
-        return "/service/get";
+        return "/view/get";
     }
 
     @GetMapping("/create")
     public String create() {
-        return "/service/create";
+        return "/view/create";
     }
 
     @GetMapping("/delete")
     public String delete() {
-        return "/service/delete";
+        return "/view/delete";
     }
 
     @GetMapping("/error")
     public String error() {
-        return "/service/error";
+        return "/view/error";
     }
 
     @GetMapping("/show_table")
     public String show_table(Model model) {
         List<Url_matching> url_matching_List = service.findAll();
         model.addAttribute("urlsList", url_matching_List);
-        return "/service/show_table";
+        return "/view/show_table";
     }
 }

@@ -15,9 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
+@RequestMapping("/service")
 public class MainRestController {
-    //TODO Add another level. For example: RequestMapping("/service").
-    // otherwise we can get shortUrl == 'some path'
     private final Url_matching_Service service;
     private List<Url_matching> url_matching_List;
     //TODO: It is possible to do caching to this list
@@ -86,7 +85,6 @@ public class MainRestController {
             return new RedirectView(result);
         } else{
             throw new BadRequestException("I don't know it!");
-            //return new RedirectView("/service/error");
         }
     }
 }
