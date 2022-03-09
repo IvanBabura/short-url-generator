@@ -14,7 +14,7 @@ public class Url_matching {
     @Column(nullable = false, unique = true)
     private String originalUrl;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String shortUrl;
 
     public Url_matching() {
@@ -49,7 +49,7 @@ public class Url_matching {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Url_matching url_matching = (Url_matching) o;
-        return idUrl == url_matching.idUrl;
+        return idUrl.equals(url_matching.idUrl);
     }
 
     @Override
