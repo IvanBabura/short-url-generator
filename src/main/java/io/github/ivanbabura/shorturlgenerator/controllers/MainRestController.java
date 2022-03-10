@@ -5,10 +5,8 @@ import io.github.ivanbabura.shorturlgenerator.entities.Url_matching;
 import io.github.ivanbabura.shorturlgenerator.services.Url_matching_Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -54,11 +52,5 @@ public class MainRestController {
         service.delete(foundUrl);
         Response response = new Response(HttpStatus.OK, "Deleted.");
         return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @GetMapping("/{shortUrlEnding}")
-    public RedirectView redirect(HttpServletRequest url, @PathVariable String shortUrlEnding) {
-        String result = service.findOriginalUrlByShortUrl(url.getRequestURL().toString());
-        return new RedirectView(result);
     }
 }
