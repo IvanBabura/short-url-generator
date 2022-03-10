@@ -27,11 +27,11 @@ public class Url_matching_ServiceImpl implements Url_matching_Service {
 
     public Url_matching create(String originalUrl) {
         if (originalUrl.equals(""))
-            throw new BadRequestException("object is null");
+            throw new BadRequestException("Object is null.");
         try {
             URL url = new URL(originalUrl);
         } catch (MalformedURLException e) {
-            throw new IncorrectUrlException("Error into URL.");
+            throw new IncorrectUrlException("Error into URL: " + originalUrl);
         }
         Url_matching result = repository.findByOriginalUrl(originalUrl);
         if (result != null)
@@ -45,20 +45,20 @@ public class Url_matching_ServiceImpl implements Url_matching_Service {
     @Override
     public void save(Url_matching url_matching) {
         if (url_matching == null)
-            throw new BadRequestException("Object is null");
+            throw new BadRequestException("Object is null.");
         if (url_matching.getOriginalUrl().equals("") ||
                 url_matching.getOriginalUrl() == null)
-            throw new BadRequestException("OriginalUrl can't be empty");
+            throw new BadRequestException("OriginalUrl can't be empty.");
         if (url_matching.getShortUrl().equals("") ||
                 url_matching.getShortUrl() == null)
-            throw new BadRequestException("ShortUrl can't be empty");
+            throw new BadRequestException("ShortUrl can't be empty.");
         repository.save(url_matching);
     }
 
     @Override
     public void delete(Url_matching url_matching) {
         if (url_matching == null)
-            throw new BadRequestException("Object is null");
+            throw new BadRequestException("Object is null.");
         repository.delete(url_matching);
     }
 
@@ -66,7 +66,7 @@ public class Url_matching_ServiceImpl implements Url_matching_Service {
     public Url_matching findByShortUrl(String shortUrl) {
         Url_matching result = repository.findByShortUrl(shortUrl);
         if (result == null)
-            throw new NotFoundException("Not found this shortUrl.");
+            throw new NotFoundException("Not found shortUrl: " + shortUrl + ".");
         return result;
     }
 
@@ -74,17 +74,17 @@ public class Url_matching_ServiceImpl implements Url_matching_Service {
     public Url_matching findByOriginalUrl(String originalUrl) {
         Url_matching result = repository.findByOriginalUrl(originalUrl);
         if (result == null)
-            throw new NotFoundException("Not found this originalUrl.");
+            throw new NotFoundException("Not found originalUrl: " + originalUrl + ".");
         return result;
     }
 
     @Override
     public String findOriginalUrlByShortUrl(String shortUrl) {
         if (shortUrl == null)
-            throw new BadRequestException("shortUrl can't be empty");
+            throw new BadRequestException("shortUrl can't be empty.");
         Url_matching result = repository.findByShortUrl(shortUrl);
         if (result == null)
-            throw new NotFoundException("Not found this shortUrl.");
+            throw new NotFoundException("Not found shortUrl: " + shortUrl + ".");
         return result.getOriginalUrl();
     }
 
