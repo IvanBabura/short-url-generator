@@ -14,43 +14,57 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice()
 public class ControllerAdvice {
-    //TODO Embed logger
     private static final Logger logger = LoggerFactory.getLogger(Url_matching_ServiceImpl.class);
 
     @ExceptionHandler(BadRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Response handleSomeException(BadRequestException e) {
+        logger.warn(HttpStatus.BAD_REQUEST + ": " + e.getMessage());
         return new Response(HttpStatus.BAD_REQUEST, e.getMessage());
     }
 
     @ExceptionHandler(FoundException.class)
     @ResponseStatus(HttpStatus.FOUND)
     public ResponseEntity<Url_matching> handleFoundException(FoundException e) {
+        logger.warn(HttpStatus.FOUND + ": " + e.getMessage());
         return new ResponseEntity<>(e.getFound_url_matching(), HttpStatus.FOUND);
     }
 
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Response handleNotFoundException(NotFoundException e) {
+        logger.warn(HttpStatus.NOT_FOUND + ": " + e.getMessage());
         return new Response(HttpStatus.NOT_FOUND, e.getMessage());
     }
 
     @ExceptionHandler(NoContentException.class)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Response handleNoContentException(NoContentException e) {
+        logger.warn(HttpStatus.NO_CONTENT + ": " + e.getMessage());
         return new Response(HttpStatus.NO_CONTENT, e.getMessage());
     }
 
     @ExceptionHandler(GenerateShortUrlException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Response handleGenerateShortUrlException(GenerateShortUrlException e) {
+        logger.warn(HttpStatus.INTERNAL_SERVER_ERROR + ": " + e.getMessage());
         return new Response(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
     }
 
     @ExceptionHandler(IncorrectUrlException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Response handleIncorrectUrlException(IncorrectUrlException e) {
+        logger.warn(HttpStatus.BAD_REQUEST + ": " + e.getMessage());
         return new Response(HttpStatus.BAD_REQUEST, e.getMessage());
     }
 
+    @ExceptionHandler(Throwable.class)
+    public ResponseEntity<?> handleThrowableException(Throwable t)
+    //This method can be rewritten to "Redirect to error page", if u don't want REST response..
+    {
+        String message = "Unexpected error: " + t.getMessage();
+        logger.error(message);
+        Response response = new Response(HttpStatus.INTERNAL_SERVER_ERROR, message);
+        return new ResponseEntity<> (response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
