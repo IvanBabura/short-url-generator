@@ -12,12 +12,13 @@
         <th>ID</th>
         <th>Original URL</th>
         <th>Short URL</th>
+        <th>Timestamp</th>
     </tr>
     <tr th:each="urlsList : ${urlsList}">
         <td th:utext="${urlsList.idUrl}">..</td>
         <td ><a th:href="@{${urlsList.originalUrl}}"><u th:utext="${urlsList.originalUrl}"></u></a></td>
         <td ><a th:href="@{${urlsList.shortUrl}}"><u th:utext="${urlsList.shortUrl}"></u></a></td>
-    </tr>
+        <td th:utext="${urlsList.timestamp}">..</td></tr>
 </table>
 </body>
 </html>

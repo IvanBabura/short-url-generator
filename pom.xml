@@ -10,7 +10,7 @@
     </parent>
     <groupId>io.github.ivanbabura</groupId>
     <artifactId>short-url-generator</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.4-SNAPSHOT</version>
     <name>short-url-generator</name>
     <description>Short URL generator</description>
     <url>https://ivanbabura.github.io</url>
