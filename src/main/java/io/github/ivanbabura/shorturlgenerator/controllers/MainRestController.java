@@ -2,8 +2,6 @@ package io.github.ivanbabura.shorturlgenerator.controllers;
 
 import io.github.ivanbabura.shorturlgenerator.dto.Response;
 import io.github.ivanbabura.shorturlgenerator.entities.Url_matching;
-import io.github.ivanbabura.shorturlgenerator.exceptions.EndOfLifeUrlException;
-import io.github.ivanbabura.shorturlgenerator.services.TtlControlService;
 import io.github.ivanbabura.shorturlgenerator.services.Url_matching_Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
