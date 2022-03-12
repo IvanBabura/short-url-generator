@@ -13,11 +13,13 @@ import java.util.List;
 public class Url_matching_ServiceImpl implements Url_matching_Service {
     private final Url_matching_Repository repository;
     private final ShortUrlGenerator generator;
+    private final TtlControlService ttlControlService;
 
     @Autowired
-    public Url_matching_ServiceImpl(Url_matching_Repository repository, ShortUrlGenerator generator) {
+    public Url_matching_ServiceImpl(Url_matching_Repository repository, ShortUrlGenerator generator, TtlControlService ttlControlService) {
         this.repository = repository;
         this.generator = generator;
+        this.ttlControlService = ttlControlService;
     }
 
     @Override
@@ -25,7 +27,7 @@ public class Url_matching_ServiceImpl implements Url_matching_Service {
         return repository.count();
     }
 
-    public Url_matching create(String originalUrl) {
+    public Url_matching createWithoutSave(String originalUrl) {
         if (originalUrl.equals(""))
             throw new BadRequestException("Object is null.");
         try {
@@ -35,7 +37,7 @@ public class Url_matching_ServiceImpl implements Url_matching_Service {
         }
         Url_matching result = repository.findByOriginalUrl(originalUrl);
         if (result != null)
-            throw new FoundException(result);
+            throw new FoundException(result, "Founded this URL in database");
         result = new Url_matching();
         result.setOriginalUrl(originalUrl);
         result.setShortUrl(generateShortUrl());
@@ -71,10 +73,24 @@ public class Url_matching_ServiceImpl implements Url_matching_Service {
     }
 
     @Override
+    public Url_matching findByShortUrlTtl(String shortUrl) {
+        Url_matching result = findByShortUrl(shortUrl);
+        checkTtl(result);
+        return result;
+    }
+
+    @Override
     public Url_matching findByOriginalUrl(String originalUrl) {
         Url_matching result = repository.findByOriginalUrl(originalUrl);
         if (result == null)
             throw new NotFoundException("Not found originalUrl: " + originalUrl + ".");
+        return result;
+    }
+
+    @Override
+    public Url_matching findByOriginalUrlTtl(String originalUrl) {
+        Url_matching result = findByOriginalUrl(originalUrl);
+        checkTtl(result);
         return result;
     }
 
@@ -85,6 +101,7 @@ public class Url_matching_ServiceImpl implements Url_matching_Service {
         Url_matching result = repository.findByShortUrl(shortUrl);
         if (result == null)
             throw new NotFoundException("Not found shortUrl: " + shortUrl + ".");
+        checkTtl(result);
         return result.getOriginalUrl();
     }
 
@@ -109,5 +126,13 @@ public class Url_matching_ServiceImpl implements Url_matching_Service {
         }
         throw new GenerateShortUrlException("Generation error. Number of attempts: " +
                 attempts + ". Please try again.");
+    }
+
+    public void checkTtl(Url_matching result){
+        if (ttlControlService.checkForExpirationOfTTL(result.getDateTime())) {
+            delete(result);
+            //TODO: can be rewritten to JSON
+            throw new EndOfLifeUrlException("TTL of " + result.getOriginalUrl() + " is over :(( Please, create short URL again.");
+        }
     }
 }

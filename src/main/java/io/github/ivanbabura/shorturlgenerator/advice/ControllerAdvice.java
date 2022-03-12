@@ -58,10 +58,15 @@ public class ControllerAdvice {
         return new Response(HttpStatus.BAD_REQUEST, e.getMessage());
     }
 
+    @ExceptionHandler(EndOfLifeUrlException.class)
+    public Response handleEndOfLifeUrlException(EndOfLifeUrlException e) {
+        logger.warn("Attempt to go to URL with ending TTL: " + e.getMessage());
+        return new Response(HttpStatus.NON_AUTHORITATIVE_INFORMATION, e.getMessage());
+    }
+
+
     @ExceptionHandler(Throwable.class)
-    public ResponseEntity<?> handleThrowableException(Throwable t)
-    //This method can be rewritten to "Redirect to error page", if u don't want REST response..
-    {
+    public ResponseEntity<?> handleThrowableException(Throwable t){
         String message = "Unexpected error: " + t.getMessage();
         logger.error(message);
         Response response = new Response(HttpStatus.INTERNAL_SERVER_ERROR, message);

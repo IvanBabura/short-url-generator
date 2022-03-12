@@ -5,11 +5,13 @@ import java.util.List;
 
 public interface Url_matching_Service{
     long count();
-    Url_matching create(String originalUrl);
+    Url_matching createWithoutSave(String originalUrl);
     void save(Url_matching url_matching);
     void delete(Url_matching url_matching);
     Url_matching findByShortUrl(String shortUrl);
+    Url_matching findByShortUrlTtl(String shortUrl);
     Url_matching findByOriginalUrl(String originalUrl);
+    Url_matching findByOriginalUrlTtl(String originalUrl);
     String findOriginalUrlByShortUrl(String shortUrl);
     List<Url_matching> findAll();
     String generateShortUrl();
