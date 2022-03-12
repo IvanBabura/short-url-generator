@@ -1,8 +1,7 @@
 package io.github.ivanbabura.shorturlgenerator.entities;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Objects;
 
 @Entity
@@ -20,8 +19,7 @@ public class Url_matching {
     private String shortUrl;
 
     @Column(nullable = false)
-    //TODO: Fix time zone
-    private final Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
+    private final Instant dateTime = Instant.now();
 
     public Url_matching() {
     }
@@ -46,8 +44,8 @@ public class Url_matching {
         this.shortUrl = shortUrl;
     }
 
-    public Timestamp getTimestamp() {
-        return timestamp;
+    public Instant getDateTime() {
+        return dateTime;
     }
 
     @Override
