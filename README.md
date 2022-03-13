@@ -37,6 +37,7 @@ MVC is able to implement all these Endpoints, but does not in all cases do the r
 - [X] Add exception logging.
 - [ ] Add caching.
 - [X] Add link lifetime (TTL = 10 min).
+- [ ] !!! I have an error if the project will be started before the options' database is initialized. while making a crutch.(((
 - [ ] Add the ability to change the TTL. Rewrite TTL end message.
 - [ ] Rewrite short-link-generation algorithm. (I don’t like it very much, it’s made for a quick hand “if only there was.” Can be improved.)
 - [ ] Implement horizontal scaling of the service.
@@ -81,6 +82,7 @@ MVC способен осуществить все эти Endpoints, но не �
 - [X] Добавить логирование исключений. 
 - [ ] Добавить кэширование. 
 - [X] Добавить время жизни ссылки (TTL = 10 мин). 
+- [ ] !!! У меня ошибка, если проект будет запущен до инициализации базы данных настроек. Пока сделал костыль.
 - [ ] Добавить возможность изменить TTL. Переписать сообщение об окончании TTL.
 - [ ] Переписать алгоритм генерации короткой ссылки. (Мне он не очень нравится, он сделан на быструю руку «лишь бы было». Можно улучшить.) 
 - [ ] Реализовать горизонтальное масштабирование сервиса. 
