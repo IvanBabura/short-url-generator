@@ -14,7 +14,12 @@ public class ProgramOptionServiceImpl implements ProgramOptionService {
     @Autowired
     public ProgramOptionServiceImpl(ProgramOptionRepository repository) {
         this.repository = repository;
-    }
+        initDefaultProgram_optionDatabase();
+        //This is just a reinsurance against an out of time initialized database.
+        // Mb, it's not a good idea to try to initialize the db here,
+        // but otherwise I might run into trouble starting services
+        // if the db isn't initialized in time. Until then, let it be.
+        }
 
     @Override
     public long count() {
@@ -53,5 +58,25 @@ public class ProgramOptionServiceImpl implements ProgramOptionService {
     public String getValueByNameOption(String nameOption) {
         ProgramOption po = findByNameOption(nameOption);
         return po.getValueOption();
+    }
+
+
+
+    public void initDefaultProgram_optionDatabase(){
+        if (count() == 0){
+            ProgramOption rootUrl = new ProgramOption();
+            rootUrl.setNameOption("ROOT_URL");
+            rootUrl.setValueOption("http://localhost:8080/");
+            repository.save(rootUrl);
+
+            ProgramOption ttl = new ProgramOption();
+            ttl.setNameOption("ttl");
+            ttl.setValueOption("600");
+            repository.save(ttl);
+
+            System.out.println("Success ProgramOption database init.");
+        } else {
+            System.out.println("ProgramOption Database already initialized.");
+        }
     }
 }

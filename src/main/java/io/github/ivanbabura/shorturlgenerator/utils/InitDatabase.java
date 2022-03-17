@@ -21,14 +21,14 @@ public class InitDatabase implements ApplicationRunner {
     }
 
     @Override
-    public void run(ApplicationArguments args){
+    public void run(ApplicationArguments args) {
         initUrl_matchingDatabase();
         initProgram_optionDatabase();
     }
 
-    public void initUrl_matchingDatabase(){
+    public void initUrl_matchingDatabase() {
         long count = url_matching_service.count();
-        if (count == 0){
+        if (count == 0) {
             String shortUrl;
             Url_matching urls_1 = new Url_matching();
             urls_1.setOriginalUrl("https://www.google.ru/");

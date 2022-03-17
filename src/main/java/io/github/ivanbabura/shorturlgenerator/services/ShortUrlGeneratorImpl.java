@@ -10,14 +10,7 @@ public class ShortUrlGeneratorImpl implements ShortUrlGenerator {
 
     @Autowired
     public ShortUrlGeneratorImpl(ProgramOptionService pos) {
-        try {
-            ROOT_URL = pos.getValueByNameOption("ROOT_URL");
-        } catch (Exception ignore) {
-            //TODO: to do this f*ching shit
-            // i don't now how init DB it early
-            System.out.println("F*CKED. Database did't init.");
-
-        }
+        ROOT_URL = pos.getValueByNameOption("ROOT_URL");
     }
 
     public String generateShortUrl() {
