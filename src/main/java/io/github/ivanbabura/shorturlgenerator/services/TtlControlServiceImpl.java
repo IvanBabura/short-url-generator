@@ -8,9 +8,8 @@ import java.time.Instant;
 public class TtlControlServiceImpl implements TtlControlService {
     private int ttl_in_seconds;
 
-    public TtlControlServiceImpl() {
-        //TODO: задать TTL извне
-        this.ttl_in_seconds = 600;
+    public TtlControlServiceImpl(ProgramOptionService pos) {
+        this.ttl_in_seconds = Integer.parseInt(pos.getValueByNameOption("TTL_in_seconds"));
     }
 
     @Override

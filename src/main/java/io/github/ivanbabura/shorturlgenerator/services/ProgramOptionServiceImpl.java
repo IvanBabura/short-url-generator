@@ -60,9 +60,8 @@ public class ProgramOptionServiceImpl implements ProgramOptionService {
         return po.getValueOption();
     }
 
-
-
     public void initDefaultProgram_optionDatabase(){
+        System.out.println("!_ Don't forget to move this method to another class for OOP.");
         if (count() == 0){
             ProgramOption rootUrl = new ProgramOption();
             rootUrl.setNameOption("ROOT_URL");
@@ -70,7 +69,7 @@ public class ProgramOptionServiceImpl implements ProgramOptionService {
             repository.save(rootUrl);
 
             ProgramOption ttl = new ProgramOption();
-            ttl.setNameOption("ttl");
+            ttl.setNameOption("TTL_in_seconds");
             ttl.setValueOption("600");
             repository.save(ttl);
 
