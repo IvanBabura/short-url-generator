@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ControllerAdvice {
     private static final Logger logger = LoggerFactory.getLogger(Url_matching_ServiceImpl.class);
 
+    //TODO: rewrite all "Response" to "ResponseEntity"
+
     @ExceptionHandler(BadRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Response handleSomeException(BadRequestException e) {

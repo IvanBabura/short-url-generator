@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public class Response{
     private LocalDateTime timestamp;
-    private int status;
+    private HttpStatus status;
     private String error;
     private String message;
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -15,7 +15,7 @@ public class Response{
 
     public Response(HttpStatus status, String message) {
         this.timestamp = LocalDateTime.now();
-        this.status = status.value();
+        this.status = status;
         this.error = status.getReasonPhrase();
         this.message = message;
         //this.path = ???
@@ -33,12 +33,12 @@ public class Response{
         this.timestamp = timestamp;
     }
 
-    public int getStatus() {
+    public HttpStatus getStatus() {
         return status;
     }
 
     public void setStatus(HttpStatus status) {
-        this.status = status.value();
+        this.status = status;
     }
 
     public void setMessage(String message) {

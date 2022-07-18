@@ -12,36 +12,45 @@ RESTful Web services. But I've added an MVC controller with simple website to de
 The project is under development and expansion.
 
 ## 2 Technology stack 
-- Maven
-- Spring (Spring boot);
-- Java 11+ (But mb it can also run on version 8);
-- Db: H2 memory Embedded;
-- Оptional: Thymeleaf only for testing REST requests from under the website.
+- Maven;
+- Spring boot;
+- Java 11;
+- JUnit 5 + SpringBootTest (including Mockito)
+- H2 memory Embedded;
+
+Optional:
+
+- HTML + JavaScript;
+- Thymeleaf;
+
+It just only for testing REST requests from under the simple website.
 
 ## 3 Project Features
 Message exchange method: JSON.  
 All data is stored in the database.
 
 REST Endpoints:
-- Formation of a short link;
-- Creation and/or obtaining a full-link based on a short-one;
-- Creation and/or obtaining a short-link based on the full-one;
-- Implementation of the redirect by a short link in the browser;
-- Deleting an entry;
-- Getting a list of all matches.
+- Formation of a short link: _POST JSON /url_;
+- Creation and/or obtaining a full-link based on a short-one: _GET /url?shortUrl=Value_;
+- Creation and/or obtaining a short-link based on the full-one: _GET /url?originalUrl=Value_;
+- Implementation of the redirect by a short link in the browser: _GET /{shortUrlEnding}_;
+- Deleting an entry: _DELETE JSON /url_;
+- Getting a list of all matches: _GET /all_urls_.
 
 MVC is able to implement all these Endpoints, but does not in all cases do the reverse transformation from JSON (I'm not very good at front-end, and this is not the task).
 
 ## 4 Tasks
 - [X] Moved all exception calls to the service.
 - [X] Add exception logging.
+- [X] Unit tests for a controller and service. 
 - [ ] Add caching.
 - [X] Add link lifetime (TTL = 10 min).
-- [ ] Add the ability to change the TTL. Rewrite TTL end message.
 - [ ] Rewrite short-link-generation algorithm. (I don’t like it very much, it’s made for a quick hand “if only there was.” Can be improved.)
 - [ ] Implement horizontal scaling of the service.
-- [ ] Rewrite the README and make a REST API document.
+- [X] Rewrite the README and add changelog file.
+- [ ] Make a REST API document.
 - [ ] You can implement Interceptors, but for now, the existing logging and functionality is enough.
+- [ ] Rewrite Controller Advice for Exceptions (any exceptions send uncorrect HTML code).
 
 P.s. ! _I try to write everything to the commits. I often forget to update the project version in pom.xml. Do not swear. This is a trifle for a project under development._!
 
@@ -53,7 +62,11 @@ Loading default program parameters (in case of failure) inside the service const
 
 - This is just a reinsurance against an out of time initialized database (doesn't affect project operation):
 
-I did not do it very competently, but it is better this way and without possible errors. Spring Boot won't let me run the utility before the controllers, and I'm not up to this problem right now. Even though it works so well.
+It is a problem in Embedded H2. If use a non-Embedded BD, this problem should go away. I did not do it very competently, but it is better this way and without possible errors. Spring Boot won't let me run the utility before the controllers, and I'm not up to this problem right now. Even though it works so well.
+
+- Scary site? Disgusting Front End? Terrible HTML and invalid script?
+
+Sorry, but I'm doing the server, not the front. The site is just for show, what my REST is works. A-a-and... I don't know CSS, just plain HTML and JS, and no deepening. Therefore, what is, is.
 ____
 # Русский
 
@@ -64,37 +77,45 @@ RESTfull сервис. Но я добавил MVC-контроллер с про
 
 ## 2 Стэк используемых технологий
 - Maven
-- Spring (Spring boot);
-- Java 11+ (но по идее сможет запуститься и с 8);
-- БД: встроенная H2 memory;
-- Не обязательно: Thymeleaf используется только для теста REST запросов в реальном сайте.
+- Spring boot;
+- Java 11;
+- JUnit 5 + SpringBootTest (including Mockito)
+- H2 memory Embedded;
+
+Дополнительно (не обязательно):
+- HTML + JavaScript;
+- Thymeleaf;
+
+Они используются только для теста REST запросов в реальном простеньком сайте.
 
 ## 3 Особенности проекта
 Способ обмена сообщений: JSON.  
 Все данные хранятся в базе данных.
 
 REST Endpoints: 
--	Формирование короткой ссылки; 
--	Создание и/или получение полной ссылки на основе краткой;
--	Создание и/или получение краткой ссылки на основе полной;
--	Осуществление перехода по короткой ссылке в браузере;
--	Удаление записи;
--	Получение списка всех соответствий.
+-	Формирование короткой ссылки: _POST JSON /url_; 
+-	Создание и/или получение полной ссылки на основе краткой: _GET /url?shortUrl=Value_;
+-	Создание и/или получение краткой ссылки на основе полной: _GET /url?originalUrl=Value_;
+-	Осуществление перехода по короткой ссылке в браузере: _GET /{shortUrlEnding}_;
+-	Удаление записи: _DELETE JSON /url_;
+-	Получение списка всех соответствий: _GET /all_urls_.
 
 MVC способен осуществить все эти Endpoints, но не во всех случаях делает обратное преобразование из JSON (я не очень умею во фронтэнд, да и задача не в этом состоит).
 
 ## 4 Задачи
 - [X] Переместить все вызовы исключений из контроллера в сервис.
-- [X] Добавить логирование исключений. 
+- [X] Добавить логирование исключений.
+- [X] Юнит тесты контроллеру и сервису.
 - [ ] Добавить кэширование. 
-- [X] Добавить время жизни ссылки (TTL = 10 мин). 
-- [ ] Добавить возможность изменить TTL. Переписать сообщение об окончании TTL.
+- [X] Добавить время жизни ссылки (TTL = 10 мин).
 - [ ] Переписать алгоритм генерации короткой ссылки. (Мне он не очень нравится, он сделан на быструю руку «лишь бы было». Можно улучшить.) 
 - [ ] Реализовать горизонтальное масштабирование сервиса. 
-- [ ] Переписать README и сделать документацию к REST API.
+- [X] Переписать README, добавить файл ченджлога для воды.
+- [ ] Сделать документацию к REST API.
 - [ ] Можно внедрить Interceptors, но пока и имеющегося логирования и функционала хватает. 
+- [ ] Переписать Controller Advice (некоторые исключения отправляют некорректный HTML-код).
 
-P.s. ! _В комитах стараюсь писать всё по пунктикам. Я часто забываю обновлять версию проекта в pom.xml. Не ругайтесь. Это мелочь для проекта в стадии разработки._!
+P.s. В коммитах я стараюсь писать всё по пунктикам.
 
 ## 5 "Не баг, а фича"
 - Пустой ответ на findAll / нет изменений по этому запросу:
@@ -103,4 +124,8 @@ P.s. ! _В комитах стараюсь писать всё по пункти
 
 - Загрузка параметров программы по умолчанию (в случае неудачи) внутри конструктора сервиса (не влияет на работу проекта):
 
-Это просто перестраховка от невовремя инициализированной БД. Я не очень грамотно её сделал, но лучше так и без возможных ошибок. Spring Boot не даёт мне запустить утилиту раньше контроллеров и мне сейчас не до этой проблемы. Хотя оно и так хорошо работает.
+Проблема во _встроенной_ H2. С НЕ встроенной БД не должно быть такой проблемы. Это просто перестраховка от невовремя инициализированной БД. Я не очень грамотно её сделал, но лучше так и без возможных ошибок. Spring Boot не даёт мне запустить утилиту раньше контроллеров и мне сейчас не до этой проблемы. Хотя оно и так хорошо работает.
+
+- Страшный сайт? Отвратительный FrontEnd? Ужасный HTML и неверный скрипт?
+
+Сарян, но я сервер делаю, а не фронт. Сайт просто для галочки, чтобы доказать работоспособность REST. Иии... я не знаю CSS, только голый HTML и JS, и без углублений. Поэтому что есть, то есть.

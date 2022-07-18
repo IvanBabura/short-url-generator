@@ -9,9 +9,9 @@ public interface Url_matching_Service{
     void save(Url_matching url_matching);
     void delete(Url_matching url_matching);
     Url_matching findByShortUrl(String shortUrl);
-    Url_matching findByShortUrlTtl(String shortUrl);
+    Url_matching checkTtlOnFindByShortUrl(String shortUrl);
     Url_matching findByOriginalUrl(String originalUrl);
-    Url_matching findByOriginalUrlTtl(String originalUrl);
+    Url_matching checkTtlOnFindByOriginalUrl(String originalUrl);
     String findOriginalUrlByShortUrl(String shortUrl);
     List<Url_matching> findAll();
     String generateShortUrl();

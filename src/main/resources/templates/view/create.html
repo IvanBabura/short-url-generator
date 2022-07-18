@@ -6,16 +6,48 @@
 </head>
 <body>
 <th:block th:insert="/_topMenu"/>
-<div>
-    <h1>Create short URL:</h1>
-    <form action="/service/create" method="POST">
-        Original URL:
-        <label>
-            <input type="text" name="originalUrl"/>
-        </label>
-        <br/>
-        <input type="submit" value="Create" />
-    </form>
-</div>
+<table border="0">
+    <tr>
+        <th>Create short URL:</th>
+    </tr>
+    <tr>
+        <td>
+            <div class="getStyle">
+                <p> Original URL:
+                    <label>
+                        <input type="text" id="originalUrl" placeholder="originalUrl">
+                    </label>
+                </p>
+                <p><button onclick="sendJSON()">Create short url</button></p>
+                <p class="result" style="color:blue"></p>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<script>
+    function sendJSON() {
+        let originalUrl = document.querySelector('#originalUrl');
+        let result = document.querySelector('.result');
+        let xhr = new XMLHttpRequest();
+        let url = "/url";
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && (xhr.status === 201 || xhr.status === 302)) {
+                result.innerHTML = this.responseText;
+            }
+        };
+        let data = JSON.stringify(
+            {
+                "idUrl": null,
+                "originalUrl": originalUrl.value,
+                "shortUrl": null,
+                "dateTime": null
+            }
+        );
+        xhr.send(data);
+    }
+</script>
 </body>
 </html>

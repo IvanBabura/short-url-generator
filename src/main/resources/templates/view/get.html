@@ -3,13 +3,6 @@
 <head>
     <meta charset="UTF-8" />
     <title>Search original url</title>
-    <style>
-        .getStyle {
-            background: #FFFFF3;
-            border: 1px solid #FFFFD0;
-            padding: 2px;
-        }
-    </style>
 </head>
 <body>
 <th:block th:insert="/_topMenu"/>
@@ -21,7 +14,7 @@
     <tr>
         <td>
             <div class="getStyle">
-                <form action="/service/get" method="GET">
+                <form action="/url" method="GET">
                     <p>Original URL: <label>
                         <input name="originalUrl" >
                     </label></p>
@@ -31,7 +24,7 @@
         </td>
         <td>
             <div class="getStyle">
-                <form action="/service/get_by_shortUrl" method="GET">
+                <form action="/url" method="GET">
                     <p>Short URL: <label>
                         <input name="shortUrl" >
                     </label></p>

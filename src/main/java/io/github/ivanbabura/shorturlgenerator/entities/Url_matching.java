@@ -24,8 +24,27 @@ public class Url_matching {
     public Url_matching() {
     }
 
+    public Url_matching(String originalUrl) {
+        this.originalUrl = originalUrl;
+    }
+
+    public Url_matching(String originalUrl, String shortUrl) {
+        this.originalUrl = originalUrl;
+        this.shortUrl = shortUrl;
+    }
+
+    public Url_matching(int idUrl, String originalUrl, String shortUrl) {
+        this.idUrl = idUrl;
+        this.originalUrl = originalUrl;
+        this.shortUrl = shortUrl;
+    }
+
     public Integer getIdUrl() {
         return idUrl;
+    }
+
+    public void setIdUrl(Integer idUrl) {
+        this.idUrl = idUrl;
     }
 
     public String getOriginalUrl() {
@@ -53,11 +72,17 @@ public class Url_matching {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Url_matching url_matching = (Url_matching) o;
-        return idUrl.equals(url_matching.idUrl);
+        try {
+            return originalUrl.equals(url_matching.originalUrl) && shortUrl.equals(url_matching.shortUrl);
+        } catch (NullPointerException e) {
+            if (shortUrl == null || url_matching.shortUrl == null)
+                return originalUrl.equals(url_matching.originalUrl);
+        }
+        return false;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idUrl);
+        return Objects.hash(originalUrl);
     }
 }

@@ -2,21 +2,93 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>Delete by original URL</title>
+    <title>Delete URL</title>
 </head>
 <body>
 <th:block th:insert="/_topMenu"/>
-<div>
-    <h1>Delete by original URL:</h1>
-    <form action="/service/delete"
-          method="delete">
-        Original URL:
-        <label>
-            <input type="text" name="originalUrl"/>
-        </label>
-        <br/>
-        <input type="submit" value="Delete" />
-    </form>
-</div>
+
+<table border="0">
+    <tr>
+        <th>Delete by original URL</th>
+        <th>Delete by short URL</th>
+    </tr>
+    <tr>
+        <td>
+            <div class="getStyle">
+
+                <p>Original URL:
+                    <label>
+                        <input type="text" id="originalUrl" placeholder="originalUrl">
+                    </label>
+                </p>
+                <p><button onclick="sendJsonOriginal()">Delete</button></p>
+                <p class="result_1" style="color:blue"></p>
+            </div>
+        </td>
+        <td>
+            <div class="getStyle">
+                <p>Short URL:
+                    <label>
+                        <input type="text" id="shortUrl" placeholder="shortUrl">
+                    </label>
+                </p>
+                <p><button onclick="sendJsonShort()">Delete</button></p>
+                <p class="result_2" style="color:blue"></p>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<script>
+    function sendJsonOriginal() {
+        let originalUrl = document.querySelector('#originalUrl');
+        let result_1 = document.querySelector('.result_1');
+        let xhr = new XMLHttpRequest();
+        let url = "/url";
+        xhr.open("DELETE", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 ) {
+                result_1.innerHTML = this.responseText;
+            }
+        };
+        let data = JSON.stringify(
+            {
+                "idUrl": null,
+                "originalUrl": originalUrl.value,
+                "shortUrl": null,
+                "dateTime": null
+            }
+        );
+        xhr.send(data);
+    }
+</script>
+
+<script>
+    function sendJsonShort() {
+        let shortUrl = document.querySelector('#shortUrl');
+        let result_2 = document.querySelector('.result_2');
+        let xhr = new XMLHttpRequest();
+        let url = "/url";
+        xhr.open("DELETE", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 ) {
+                result_2.innerHTML = this.responseText;
+            }
+        };
+        let data = JSON.stringify(
+            {
+                "idUrl": null,
+                "originalUrl": null,
+                "shortUrl": shortUrl.value,
+                "dateTime": null
+            }
+        );
+        xhr.send(data);
+    }
+</script>
+
+
 </body>
 </html>

@@ -17,6 +17,14 @@ public class ProgramOption {
     @Column(nullable = false)
     String valueOption;
 
+    public ProgramOption() {
+    }
+
+    public ProgramOption(String nameOption, String valueOption) {
+        this.nameOption = nameOption;
+        this.valueOption = valueOption;
+    }
+
     public Integer getIdOption() {
         return idOption;
     }

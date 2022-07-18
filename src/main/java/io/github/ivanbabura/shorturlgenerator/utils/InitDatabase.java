@@ -29,19 +29,8 @@ public class InitDatabase implements ApplicationRunner {
     public void initUrl_matchingDatabase() {
         long count = url_matching_service.count();
         if (count == 0) {
-            String shortUrl;
-            Url_matching urls_1 = new Url_matching();
-            urls_1.setOriginalUrl("https://www.google.ru/");
-            shortUrl = url_matching_service.generateShortUrl();
-            urls_1.setShortUrl(shortUrl);
-            url_matching_service.save(urls_1);
-
-            Url_matching urls_2 = new Url_matching();
-            urls_2.setOriginalUrl("http://yandex.ru/");
-            shortUrl = url_matching_service.generateShortUrl();
-            urls_2.setShortUrl(shortUrl);
-            url_matching_service.save(urls_2);
-
+            url_matching_service.save(new Url_matching("https://www.google.ru/", url_matching_service.generateShortUrl()));
+            url_matching_service.save(new Url_matching("http://yandex.ru/", url_matching_service.generateShortUrl()));
             System.out.println("Success Url_matching database init.");
         } else {
             System.out.println("Url_matching Database already initialized.");
@@ -51,16 +40,8 @@ public class InitDatabase implements ApplicationRunner {
     public void initProgram_optionDatabase(){
         long count = programOptionService.count();
         if (count == 0){
-            ProgramOption rootUrl = new ProgramOption();
-            rootUrl.setNameOption("ROOT_URL");
-            rootUrl.setValueOption("http://localhost:8080/");
-            programOptionService.save(rootUrl);
-
-            ProgramOption ttl = new ProgramOption();
-            ttl.setNameOption("ttl");
-            ttl.setValueOption("600");
-            programOptionService.save(ttl);
-
+            programOptionService.save(new ProgramOption("ROOT_URL","http://localhost:8080/"));
+            programOptionService.save(new ProgramOption("ttl","600"));
             System.out.println("Success ProgramOption database init.");
         } else {
             System.out.println("ProgramOption Database already initialized.");
